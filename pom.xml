@@ -15,7 +15,6 @@
         <module>user-service</module>
         <module>monitor-service</module>
         <module>auth-service</module>
-        <module>scheduler-service</module>
     </modules>
 
     <parent>

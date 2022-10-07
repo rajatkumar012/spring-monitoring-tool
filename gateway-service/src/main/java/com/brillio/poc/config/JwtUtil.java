@@ -1,6 +1,7 @@
 package com.brillio.poc.config;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +29,11 @@ public class JwtUtil {
     }
 
     private boolean isTokenExpired(String token) {
-        return this.getAllClaimsFromToken(token).getExpiration().before(new Date());
+        try {
+            return this.getAllClaimsFromToken(token).getExpiration().before(new Date());
+        } catch (ExpiredJwtException expiredJwtException) {
+            return  true;
+        }
     }
 
     public boolean isInvalid(String token) {

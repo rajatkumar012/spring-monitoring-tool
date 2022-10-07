@@ -1,17 +1,13 @@
 package com.brillio.poc.entities;
 
-import com.brillio.poc.entities.model.StateStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.Optional;
+
 
 @Entity
 @AllArgsConstructor
@@ -31,9 +27,10 @@ public class Website {
     @Column(name = "website_name")
     private String websiteName;
 
-    @OneToMany(targetEntity =WebsiteStates.class ,cascade = CascadeType.ALL)
-    @JoinColumn(name = "website_fk_id", referencedColumnName = "website_id")
-    private List<WebsiteStates> websiteStates;
+    @JoinColumn(name = "website_id", referencedColumnName = "website_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    private WebsiteStates websiteStates;
+
     @Column(name = "website_url")
     private String websiteUrl;
 

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/website")
 @Slf4j
@@ -43,7 +45,16 @@ public class WebsiteController {
         if (website != null) {
             return ResponseEntity.ok(new WebsiteResponse(null, website, "Successfully retrieve data"));
         }
-        return ResponseEntity.ok(new WebsiteResponse("Bad Request", null, "Invalid Id to remove monitoring check"));
+        return ResponseEntity.ok(new WebsiteResponse("Bad Request", null, "Invalid Id to get details"));
     }
 
+    @GetMapping
+    public ResponseEntity<?> getAllList(@RequestHeader("userId") String id) {
+        List<Website> website;
+        website = websiteService.getAllActiveWebsiteCheck();
+        if (website != null) {
+            return ResponseEntity.ok(website);
+        }
+        return ResponseEntity.ok(new WebsiteResponse("Bad Request", null, "Invalid Id to remove monitoring check"));
+    }
 }

@@ -15,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Data
-@Table(name = "websites_states")
+@Table(name = "website_status")
 public class WebsiteStates {
 
     @Id
@@ -28,10 +28,16 @@ public class WebsiteStates {
     private StateStatus status;
 
     @Column(name = "up_time")
-    private Long upTime;
+    private double upTime;
 
     @Column(name = "down_time")
-    private Long downTime;
+    private double downTime;
+
+    @Column(name = "response_time")
+    private double responseTime;
+
+    @Column(name = "down_count")
+    private int downCount = 0;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

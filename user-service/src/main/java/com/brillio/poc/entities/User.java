@@ -25,6 +25,7 @@ public class User {
     private long id;
     private String firstName;
     private String lastName;
+    @Column(name="email", unique=true)
     private String email;
     private String password;
     @CreationTimestamp
